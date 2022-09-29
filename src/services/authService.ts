@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { findUserById, findUserByUsername } from '../repositories/userRepository';
+import { findUserById, findUserByUsername } from '../repositories/usersRepository';
 import { User, SignInData } from '../types/userTypes';
 
 const SECRET = process.env.JWT_SECRET as string;

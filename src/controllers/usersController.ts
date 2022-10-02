@@ -3,7 +3,7 @@ import sendResponse from '../utils/sendResponse';
 import { Request, Response } from 'express';
 
 export async function signUp(req: Request, res: Response) {
-  signUpUser(req.body);
+  await signUpUser(req.body);
   return sendResponse({ type: 'Created' }, res);
 }
 

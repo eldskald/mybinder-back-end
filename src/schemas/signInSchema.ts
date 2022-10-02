@@ -2,11 +2,12 @@ import joi, { Schema } from 'joi';
 
 const signInSchema: Schema = joi.object({
   username: joi.string()
-    .pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9 _'-]+$/)
+    .min(3)
     .max(50)
     .required()
     .messages({
       'string.base': 'Username must be a text',
+      'string.min': 'Username must be at least 3 characters long',
       'string.max': 'Username must be at most 50 characters long',
       'any.required': 'Username field is required'
     }),

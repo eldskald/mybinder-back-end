@@ -6,5 +6,5 @@ import { User } from '../types/userTypes';
 export async function signIn(req: Request, res: Response) {
   const user: User = await validateCredentials(req.body);
   const token: string = generateToken(user.id);
-  return sendResponse({ type: 'Ok', message: token }, res);
+  return sendResponse({ type: 'Ok', message: { token } }, res);
 }

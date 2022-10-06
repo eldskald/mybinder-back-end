@@ -9,7 +9,7 @@ export function generateToken(userId: number): string {
   return jwt.sign(
     { userId },
     SECRET,
-    { expiresIn: 60 * 60 * 8 }
+    { expiresIn: 60 * 60 * 24 * 30 }
   );
 }
 

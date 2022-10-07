@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { signUp, updateDisplayname } from '../controllers/usersController';
+import { signUp, updateUser } from '../controllers/usersController';
 import schemaValidation from '../middlewares/schemaValidation';
 import tokenValidation from '../middlewares/tokenValidation';
 import signUpSchema from '../schemas/signUpSchema';
-import changeDisplaynameSchema from '../schemas/changeDisplaynameSchema';
+import updateUserSchema from '../schemas/updateUserSchema';
 
 const userRouter = Router();
 userRouter.post(
@@ -11,10 +11,10 @@ userRouter.post(
   schemaValidation(signUpSchema), 
   signUp
 );
-userRouter.post(
-  '/users/:id/changeDisplayname',
+userRouter.put(
+  '/users/update',
   tokenValidation,
-  schemaValidation(changeDisplaynameSchema),
-  updateDisplayname
+  schemaValidation(updateUserSchema),
+  updateUser
 );
 export default userRouter;

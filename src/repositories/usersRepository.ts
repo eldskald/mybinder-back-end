@@ -1,5 +1,5 @@
 import db from '../database';
-import { User, SignUpData } from '../types/userTypes';
+import { User, SignUpData, UpdateUserData } from '../types/userTypes';
 
 export async function findUserById(id: number): Promise<User | null> {
   return await db.user.findUnique({
@@ -17,9 +17,9 @@ export async function insertUser(data: SignUpData): Promise<void> {
   await db.user.create({ data });
 }
 
-export async function updateDisplayname(id: number, newName: string): Promise<void> {
+export async function updateUser(id: number, data: UpdateUserData): Promise<void> {
   await db.user.update({
-    data: { displayname: newName },
+    data,
     where: { id }
   });
 }

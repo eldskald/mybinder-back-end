@@ -11,9 +11,45 @@ datasource db {
 }
 
 model User {
-    id          Int     @id @default(autoincrement())
-    username    String  @unique @db.VarChar(50)
-    displayname String  @db.VarChar(50)
+    id          Int         @id @default(autoincrement())
+    username    String      @unique @db.VarChar(50)
+    displayname String      @db.VarChar(50)
     password    String
+    pages       Page[]
     @@map("users")
+}
+
+model Page {
+    id          Int         @id @default(autoincrement())
+    userId      Int
+    title       String      @db.VarChar(50)
+    user        User        @relation(fields: [userId], references: [id])
+    createdAt   DateTime    @default(now())
+    entries     Entry[]
+    @@unique([userId, title])
+    @@map("pages")
+}
+
+enum EntryType {
+    TITLE
+    BANNER
+    IMAGE
+    THUMBNAIL
+    TEXT
+    SPACE
+}
+
+model Entry {
+    id          Int         @id @default(autoincrement())
+    pageId      Int
+    index       Int         @unique
+    type        EntryType
+    title       String?
+    description String?
+    text        String?
+    imageUrl    String?
+    sourceUrl   String?
+    space       Int?
+    page        Page        @relation(fields: [pageId], references: [id])
+    @@map("entries")
 }

@@ -31,12 +31,12 @@ model Page {
 }
 
 enum EntryType {
-    TITLE
-    BANNER
-    IMAGE
-    THUMBNAIL
-    TEXT
-    SPACE
+    title
+    banner
+    image
+    thumbnail
+    text
+    space
 }
 
 model Entry {

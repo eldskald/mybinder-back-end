@@ -16,7 +16,7 @@ pageRouter.get(
   getPage
 );
 pageRouter.get(
-  '/users/pages',
+  '/pages',
   tokenValidation,
   getUserPages
 );
@@ -33,7 +33,7 @@ pageRouter.patch(
   changePageTitle
 );
 pageRouter.delete(
-  '/pages/delete/:pageId',
+  '/pages/:pageId',
   tokenValidation,
   deletePage
 );

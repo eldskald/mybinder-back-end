@@ -15,7 +15,7 @@ export function generateToken(userId: number): string {
 
 export async function validateToken(token: string): Promise<User> {
   try {
-    const payload: any = jwt.verify(token, SECRET)
+    const payload: any = jwt.verify(token, SECRET);
     const user: User | null = await findUserById(payload.userId);
     if (!user) throw { type: 'Unauthorized' };
     return user;

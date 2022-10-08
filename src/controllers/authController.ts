@@ -9,7 +9,7 @@ export async function signIn(req: Request, res: Response) {
   return sendResponse({
     type: 'Ok',
     message: {
-      userId: user.id,
+      id: user.id,
       username: user.username,
       displayname: user.displayname,
       token
@@ -22,7 +22,7 @@ export async function signInFromToken(req: Request, res: Response) {
   return sendResponse({
     type: 'Ok',
     message: {
-      userId: user.id,
+      id: user.id,
       username: user.username,
       displayname: user.displayname,
     }

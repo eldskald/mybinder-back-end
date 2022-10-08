@@ -5,7 +5,7 @@ async function tokenValidation(req: Request, res: Response, next: NextFunction) 
   if (!req.headers.authorization) throw { type: 'Unauthorized' };
   const auth: string = req.headers.authorization;
   if (auth.slice(0, 7) != 'Bearer ') throw { type: 'Unauthorized' };
-  res.locals.user = await validateToken(auth.replace('Bearer ', ''))
+  res.locals.user = await validateToken(auth.replace('Bearer ', ''));
   next();
 }
 

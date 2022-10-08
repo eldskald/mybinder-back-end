@@ -4,14 +4,14 @@ import { Request, Response } from 'express';
 
 export async function getUserPages(_req: Request, res: Response) {
   const pages = await services.getUserPages(res.locals.user);
-  return sendResponse({ type: 'Ok' }, res);
+  return sendResponse({ type: 'Ok', message: pages }, res);
 }
 
 export async function getPage(req: Request, res: Response) {
   const pageId = parseInt(req.params.pageId);
   if (!pageId) throw { type: 'Not Found' };
   const page = await services.getPageById(pageId);
-  return sendResponse({ type: 'Ok' }, res);
+  return sendResponse({ type: 'Ok', message: page }, res);
 }
 
 export async function postPage(req: Request, res: Response) {

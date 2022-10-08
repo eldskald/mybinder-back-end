@@ -23,8 +23,8 @@ model Page {
     id          Int         @id @default(autoincrement())
     userId      Int
     title       String      @db.VarChar(50)
-    user        User        @relation(fields: [userId], references: [id])
     createdAt   DateTime    @default(now())
+    user        User        @relation(fields: [userId], references: [id])
     entries     Entry[]
     @@unique([userId, title])
     @@map("pages")

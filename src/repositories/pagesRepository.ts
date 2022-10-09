@@ -1,5 +1,5 @@
 import db from '../database';
-import { Page } from '../types/pageTypes';
+import { Page, FullPage } from '../types/pageTypes';
 
 export async function getUserPages(userId: number): Promise<Page[]> {
   return await db.page.findMany({
@@ -8,9 +8,17 @@ export async function getUserPages(userId: number): Promise<Page[]> {
   });
 }
 
-export async function getPageById(pageId: number): Promise<Page | null> {
+export async function getPageById(pageId: number): Promise<FullPage | null> {
   return await db.page.findUnique({
-    where: { id: pageId }
+    where: { id: pageId },
+    include: { entries: true }
+  });
+}
+
+export async function getPageByTitle(title: string, userId: number): Promise<FullPage | null> {
+  return await db.page.findUnique({
+    where: { userId_title: { userId, title} },
+    include: { entries: true }
   });
 }
 

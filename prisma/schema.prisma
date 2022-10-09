@@ -44,12 +44,12 @@ model Entry {
     pageId      Int
     index       Int         @unique
     type        EntryType
-    title       String?
-    description String?
-    text        String?
-    imageUrl    String?
-    sourceUrl   String?
-    space       Int?
+    title       String
+    description String
+    text        String
+    imageUrl    String
+    sourceUrl   String
+    space       Int
     page        Page        @relation(fields: [pageId], references: [id])
     @@map("entries")
 }

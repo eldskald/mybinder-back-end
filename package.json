@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
+    "deploy": "git push heroku main",
     "migrate-db": "npx prisma migrate dev",
     "migrate-db-test": "npx dotenv-cli -e .env.test prisma migrate dev",
     "test:integration": "npx dotenv-cli -e .env.test jest -- --no-cache -i --testPathPattern=tests/integration",

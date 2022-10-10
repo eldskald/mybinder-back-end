@@ -11,14 +11,14 @@ export async function getUserPages(userId: number): Promise<Page[]> {
 export async function getPageById(pageId: number): Promise<FullPage | null> {
   return await db.page.findUnique({
     where: { id: pageId },
-    include: { entries: true }
+    include: { entries: { orderBy: { index: 'asc' } } }
   });
 }
 
 export async function getPageByUrl(urlName: string, userId: number): Promise<FullPage | null> {
   return await db.page.findUnique({
     where: { userId_urlName: { userId, urlName } },
-    include: { entries: true }
+    include: { entries: { orderBy: { index: 'asc' } } }
   });
 }
 

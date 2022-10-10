@@ -8,7 +8,7 @@ import {
 } from '../controllers/pagesController';
 import tokenValidation from '../middlewares/tokenValidation';
 import schemaValidation from '../middlewares/schemaValidation';
-import pageUrlNameSchema from '../schemas/pageUrlNameSchema';
+import createPageSchema from '../schemas/createPageSchema';
 import updatePageSchema from '../schemas/updatePageSchema';
 
 const pageRouter = Router();
@@ -24,7 +24,7 @@ pageRouter.get(
 pageRouter.post(
   '/pages',
   tokenValidation,
-  schemaValidation(pageUrlNameSchema),
+  schemaValidation(createPageSchema),
   postPage
 );
 pageRouter.patch(

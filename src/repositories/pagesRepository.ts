@@ -1,5 +1,5 @@
 import db from '../database';
-import { Page, FullPage } from '../types/pageTypes';
+import { Page, FullPage, NewPageData } from '../types/pageTypes';
 
 export async function getUserPages(userId: number): Promise<Page[]> {
   return await db.page.findMany({
@@ -22,9 +22,9 @@ export async function getPageByUrl(urlName: string, userId: number): Promise<Ful
   });
 }
 
-export async function insertPage(userId: number, urlName: string): Promise<void> {
+export async function insertPage(userId: number, data: NewPageData): Promise<void> {
   await db.page.create({
-    data: { userId, urlName, title: '' }
+    data: { userId, title: data.title, urlName: data.urlName }
   });
 }
 

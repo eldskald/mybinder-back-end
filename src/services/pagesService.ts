@@ -15,14 +15,7 @@ export async function getPageById(pageId: number): Promise<Page> {
 export async function insertPage(user: User, data: NewPageData): Promise<void> {
   const urlCheck = await repository.getPageByUrl(data.urlName, user.id);
   if (urlCheck) throw { type: 'Conflict', message: 'URL Name already in use' };
-  return repository.insertPage(user.id, data.urlName);
-}
-
-export async function changePageTitle(user: User, pageId: number, newTitle: NewPageData): Promise<void> {
-  const page = await repository.getPageById(pageId);
-  if (!page) throw { type: 'Not Found' };
-  if (page.userId !== user.id) throw { type: 'Unauthorized' };
-  await repository.updatePage(pageId, newTitle);
+  return repository.insertPage(user.id, data);
 }
 
 export async function updatePage(

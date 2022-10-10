@@ -3,6 +3,7 @@ import {
   getEntries,
   postEntry,
   putEntry,
+  deleteEntry,
   moveUpEntry,
   moveDownEntry
 } from '../controllers/entriesController';
@@ -25,6 +26,11 @@ entriesRouter.put(
   tokenValidation,
   schemaValidation(entrySchema),
   putEntry
+);
+entriesRouter.delete(
+  '/entries/:pageId/:entryId',
+  tokenValidation,
+  deleteEntry
 );
 entriesRouter.patch(
   '/entries/move-up/:pageId/:entryId',

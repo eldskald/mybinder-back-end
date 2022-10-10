@@ -47,6 +47,20 @@ export async function updateEntry(
   await repository.updateEntry(entryId, newData);
 }
 
+export async function deleteEntry(
+  user: User,
+  pageId: number,
+  entryId: number,
+): Promise<void> {
+  const page = await getPageById(pageId);
+  if (!page) throw { type: 'Not Found', message: 'Page not found' };
+  if (page.userId !== user.id) throw { type: 'Unauthorized' };
+  const entry = await repository.getEntryById(entryId);
+  if (!entry) throw { type: 'Not Found', message: 'Entry not found' };
+  if (entry.pageId !== page.id) throw { type: 'Unauthorized' };
+  await repository.deleteEntry(entryId);
+}
+
 export async function moveUpEntry(
   user: User,
   pageId: number,

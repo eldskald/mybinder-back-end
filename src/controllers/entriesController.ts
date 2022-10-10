@@ -4,8 +4,8 @@ import { Request, Response } from 'express';
 
 export async function getEntries(req: Request, res: Response) {
   const { username, pagename } = req.params;
-  await service.getPageEntries(pagename, username)
-  return sendResponse({ type: 'Ok' }, res);
+  const page = await service.getPageEntries(pagename, username)
+  return sendResponse({ type: 'Ok', message: page }, res);
 }
 
 export async function postEntry(req: Request, res: Response) {
@@ -22,6 +22,15 @@ export async function putEntry(req: Request, res: Response) {
   if (!entryId) throw { type: 'Not Found' };
   await service.updateEntry(res.locals.user, pageId, entryId, req.body);
   return sendResponse({ type: 'Updated' }, res);
+}
+
+export async function deleteEntry(req: Request, res: Response) {
+  const pageId = parseInt(req.params.pageId);
+  if (!pageId) throw { type: 'Not Found' };
+  const entryId = parseInt(req.params.entryId);
+  if (!entryId) throw { type: 'Not Found' };
+  await service.deleteEntry(res.locals.user, pageId, entryId);
+  return sendResponse({ type: 'Deleted' }, res);
 }
 
 export async function moveUpEntry(req: Request, res: Response) {

@@ -58,7 +58,11 @@ export async function deleteEntry(
   const entry = await repository.getEntryById(entryId);
   if (!entry) throw { type: 'Not Found', message: 'Entry not found' };
   if (entry.pageId !== page.id) throw { type: 'Unauthorized' };
+  const entryIndex: number = entry.index;
   await repository.deleteEntry(entryId);
+  for (const element of page.entries) {
+    if (element.index > entryIndex) repository.moveUpEntry(element.id);
+  }
 }
 
 export async function moveUpEntry(
@@ -72,9 +76,10 @@ export async function moveUpEntry(
   const entry = await repository.getEntryById(entryId);
   if (!entry) throw { type: 'Not Found', message: 'Entry not found' };
   if (entry.pageId !== page.id) throw { type: 'Unauthorized' };
-  if (entry.index === 0) throw { type: 'Not Allowed' };
+  if (entry.index === 0) throw { type: 'Not Allowed', message: 'Already at the top' };
+  const entryIndex = entry.index;
   await repository.moveUpEntry(entryId);
-  await repository.moveDownEntry(page.entries[1].id);
+  await repository.moveDownEntry(page.entries[entryIndex - 1].id);
 }
 
 export async function moveDownEntry(
@@ -88,7 +93,8 @@ export async function moveDownEntry(
   const entry = await repository.getEntryById(entryId);
   if (!entry) throw { type: 'Not Found', message: 'Entry not found' };
   if (entry.pageId !== page.id) throw { type: 'Unauthorized' };
-  if (entry.index === page.entries.length - 1) throw { type: 'Not Allowed' };
+  if (entry.index === page.entries.length - 1) throw { type: 'Not Allowed', message: 'Already at the bottom' };
+  const entryIndex = entry.index;
   await repository.moveDownEntry(entryId);
-  await repository.moveUpEntry(page.entries[page.entries.length - 2].id);
+  await repository.moveUpEntry(page.entries[entryIndex + 1].id);
 }

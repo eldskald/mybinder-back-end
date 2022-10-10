@@ -3,7 +3,8 @@ import db from '../database';
 
 export async function getPageEntries(pageId: number): Promise<Entry[]> {
   return await db.entry.findMany({
-    where: { pageId }
+    where: { pageId },
+    orderBy: { index: 'asc' }
   });
 }
 

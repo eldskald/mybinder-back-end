@@ -42,7 +42,7 @@ enum EntryType {
 model Entry {
     id          Int         @id @default(autoincrement())
     pageId      Int
-    index       Int         @unique
+    index       Int
     type        EntryType
     title       String
     description String

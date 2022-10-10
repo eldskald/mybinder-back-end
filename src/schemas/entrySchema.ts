@@ -1,6 +1,14 @@
 import joi, { Schema } from 'joi';
 
 const entrySchema: Schema = joi.object({
+  type: joi.string()
+    .valid('title', 'thumbnail', 'text', 'image', 'space')
+    .required()
+    .messages({
+      'string.base': 'Type must be text',
+      'any.only': 'Invalid type',
+      'any.required': 'Type field is required'
+    }),
   title: joi.string()
     .messages({
       'string.base': 'Title must be text'
@@ -14,16 +22,12 @@ const entrySchema: Schema = joi.object({
       'string.base': 'Text must be text'
     }),
   imageUrl: joi.string()
-  .uri()
   .messages({
-    'string.base': 'Image URL must be text',
-    'string.uri': 'Image URL must be a valid URI'
+    'string.base': 'Image URL must be text'
   }),
   sourceUrl: joi.string()
-    .uri()
     .messages({
-      'string.base': 'Source URL must be text',
-      'string.uri': 'Source URL must be a valid URI'
+      'string.base': 'Source URL must be text'
     }),
   space: joi.number()
     .integer()

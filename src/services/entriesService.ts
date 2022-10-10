@@ -1,5 +1,5 @@
 import * as repository from '../repositories/entriesRepository';
-import { getPageByTitle, getPageById } from '../repositories/pagesRepository';
+import { getPageByUrl, getPageById } from '../repositories/pagesRepository';
 import { findUserByUsername } from '../repositories/usersRepository'
 import { FullPage } from '../types/pageTypes';
 import { Entry, EntryData } from '../types/entryTypes';
@@ -8,7 +8,7 @@ import { User } from '../types/userTypes';
 export async function getPageEntries(pagename: string, username: string): Promise<FullPage> {
   const user = await findUserByUsername(username);
   if (!user) throw { type: 'Not Found' };
-  const page = await getPageByTitle(pagename, user.id);
+  const page = await getPageByUrl(pagename, user.id);
   if (!page) throw { type: 'Not Found' };
   return page;
 }

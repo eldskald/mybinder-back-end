@@ -15,16 +15,16 @@ export async function getPageById(pageId: number): Promise<FullPage | null> {
   });
 }
 
-export async function getPageByTitle(title: string, userId: number): Promise<FullPage | null> {
+export async function getPageByUrl(urlName: string, userId: number): Promise<FullPage | null> {
   return await db.page.findUnique({
-    where: { userId_title: { userId, title} },
+    where: { userId_urlName: { userId, urlName } },
     include: { entries: true }
   });
 }
 
-export async function insertPage(userId: number, title: string): Promise<void> {
+export async function insertPage(userId: number, urlName: string): Promise<void> {
   await db.page.create({
-    data: { userId, title }
+    data: { userId, urlName, title: '' }
   });
 }
 

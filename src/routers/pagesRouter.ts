@@ -3,12 +3,13 @@ import {
   getPage,
   getUserPages,
   postPage,
-  changePageTitle,
+  patchPage,
   deletePage
 } from '../controllers/pagesController';
 import tokenValidation from '../middlewares/tokenValidation';
 import schemaValidation from '../middlewares/schemaValidation';
-import pageTitleSchema from '../schemas/pageTitleSchema';
+import pageUrlNameSchema from '../schemas/pageUrlNameSchema';
+import updatePageSchema from '../schemas/updatePageSchema';
 
 const pageRouter = Router();
 pageRouter.get(
@@ -23,14 +24,14 @@ pageRouter.get(
 pageRouter.post(
   '/pages',
   tokenValidation,
-  schemaValidation(pageTitleSchema),
+  schemaValidation(pageUrlNameSchema),
   postPage
 );
 pageRouter.patch(
-  '/pages/changeTitle/:pageId',
+  '/pages/update/title/:pageId',
   tokenValidation,
-  schemaValidation(pageTitleSchema),
-  changePageTitle
+  schemaValidation(updatePageSchema),
+  patchPage
 );
 pageRouter.delete(
   '/pages/:pageId',

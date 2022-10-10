@@ -19,10 +19,10 @@ export async function postPage(req: Request, res: Response) {
   return sendResponse({ type: 'Created' }, res);
 }
 
-export async function changePageTitle(req: Request, res: Response) {
+export async function patchPage(req: Request, res: Response) {
   const pageId = parseInt(req.params.pageId);
   if (!pageId) throw { type: 'Not Found' };
-  await services.changePageTitle(res.locals.user, pageId, req.body);
+  await services.updatePage(res.locals.user, pageId, req.body);
   return sendResponse({ type: 'Ok' }, res);
 }
 

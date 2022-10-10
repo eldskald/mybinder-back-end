@@ -12,7 +12,7 @@ import entrySchema from '../schemas/entrySchema';
 
 const entriesRouter = Router();
 entriesRouter.get(
-  '/:username/:pagename',
+  '/entries/:username/:pagename',
   getEntries
 );
 entriesRouter.post(

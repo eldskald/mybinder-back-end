@@ -23,16 +23,16 @@ model Page {
     id          Int         @id @default(autoincrement())
     userId      Int
     title       String      @db.VarChar(50)
+    urlName     String      @db.VarChar(50)
     createdAt   DateTime    @default(now())
     user        User        @relation(fields: [userId], references: [id])
     entries     Entry[]
-    @@unique([userId, title])
+    @@unique([userId, urlName])
     @@map("pages")
 }
 
 enum EntryType {
     title
-    banner
     image
     thumbnail
     text

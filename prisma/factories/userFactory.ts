@@ -3,7 +3,7 @@ import { User } from '../../src/types/userTypes';
 
 function userFactory(): Omit<User, 'id'> {
   return {
-    username: faker.internet.userName(),
+    username: faker.name.fullName().replace(' ', '-'),
     displayname: faker.name.fullName(),
     password: faker.internet.password()
   };

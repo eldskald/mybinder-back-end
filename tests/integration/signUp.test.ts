@@ -16,15 +16,23 @@ describe('POST /sign-up integration test...', () => {
   it('Sending correct information, must return 201', async () => {
     const data = userFactory();
     const response = await supertest(app).post('/sign-up').send(data);
-    const query = await db.user.findUnique({ where: { id: 1 } });
+    const query = await db.user.findUnique({ where: { username: data.username } });
     expect(response.status).toBe(201);
-    expect(query?.id).toBe(1);
+    expect(query).not.toBeNull();
   });
 
   it('Sending the same user again, must return 409', async () => {
-    const user = userFactory();
-    await createUser(user);
-    const response = await supertest(app).post('/sign-up').send(user);
+    const user1 = await createUser(userFactory());
+    const user2 = userFactory();
+    const response = await supertest(app)
+      .post('/sign-up')
+      .send({
+        username: user1.username,
+        displayname: user2.displayname,
+        password: user2.password
+      });
+    const query = await db.user.findUnique({ where: { id: 2 } });
     expect(response.status).toBe(409);
+    expect(query).toBeNull();
   });
 });

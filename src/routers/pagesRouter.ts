@@ -28,7 +28,7 @@ pageRouter.post(
   postPage
 );
 pageRouter.patch(
-  '/pages/update/title/:pageId',
+  '/pages/:pageId',
   tokenValidation,
   schemaValidation(updatePageSchema),
   patchPage

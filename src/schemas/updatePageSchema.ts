@@ -2,10 +2,10 @@ import joi, { Schema } from 'joi';
 
 const updatePageSchema: Schema = joi.object({
   urlName: joi.string()
-    .uri()
+    .pattern(/^[A-Za-z0-9_-]+$/)
     .messages({
       'string.base': 'URL Name must be text',
-      'string.uri': 'URL Name must be a valid URI'
+      'string.pattern.base': 'URL Name must contain only letters without accents, numbers, underscores and dashes.',
     }),
   title: joi.string()
     .messages({

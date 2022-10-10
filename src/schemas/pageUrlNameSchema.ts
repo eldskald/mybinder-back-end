@@ -2,11 +2,11 @@ import joi, { Schema } from 'joi';
 
 const pageUrlNameSchema: Schema = joi.object({
   urlName: joi.string()
-    .uri()
+    .pattern(/^[A-Za-z0-9_-]+$/)
     .required()
     .messages({
       'string.base': 'URL Name must be text',
-      'string.uri': 'URL Name must be a valid URI',
+      'string.pattern.base': 'URL Name must contain only letters without accents, numbers, underscores and dashes.',
       'any.required': 'URL Name field is required'
     })
 });

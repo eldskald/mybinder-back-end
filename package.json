@@ -9,9 +9,9 @@
     "start": "node dist/server.js",
     "migrate-db": "npx prisma migrate dev",
     "migrate-db-test": "npx dotenv-cli -e .env.test prisma migrate dev",
-    "test:integration": "npx dotenv-cli -e .env.test jest --no-cache -i --testPathPattern=tests/integration",
-    "test:unit": "npx dotenv-cli -e .env.test jest --no-cache -i --coverate --testPathPattern=tests/unit",
-    "test:e2e": "npx dotenv-cli -e .env.test nodemon src/server.ts"
+    "test:integration": "npx dotenv-cli -e .env.test jest -- --no-cache -i --testPathPattern=tests/integration",
+    "test:unit": "npx dotenv-cli -e .env.test jest -- --no-cache -i --coverage --testPathPattern=tests/unit",
+    "test:e2e": "NODE_ENV=test npx dotenv-cli -e .env.test nodemon src/server.ts"
   },
   "keywords": [],
   "author": "",

@@ -5,7 +5,7 @@ import userFactory from '../../prisma/factories/userFactory';
 import createUser from '../utils/createUser';
 
 beforeEach(async () => {
-  await db.$queryRaw`TRUNCATE TABLE users RESTART IDENTITY`;
+  await db.$queryRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
 });
 
 afterAll(() => {

@@ -14,9 +14,9 @@ export async function updateUser(data: UpdateUserData, user: User): Promise<void
   if (!data.displayname && !data.newPassword) throw { type: 'Unprocessable', message: 'Must update something' };
   const entries: [string, string][] = [];
   if (data.newPassword) {
-    if (!data.oldPassword) throw { type: 'Unprocessable', message: 'Must match old password correctly to update it' };
+    if (!data.oldPassword) throw { type: 'Unauthorized', message: 'Must match old password correctly to update it' };
     const passwordCheck: boolean = await bcrypt.compare(data.oldPassword, user.password);
-    if (!passwordCheck) throw { type: 'Unprocessable', message: 'Must match old password correctly to update it' };
+    if (!passwordCheck) throw { type: 'Unauthorized', message: 'Must match old password correctly to update it' };
     const passwordHash: string = await bcrypt.hash(data.newPassword, 10);
     entries.push(['password', passwordHash]);
   }

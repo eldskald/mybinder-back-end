@@ -2,7 +2,7 @@ import joi, { Schema } from 'joi';
 
 const entrySchema: Schema = joi.object({
   type: joi.string()
-    .valid('title', 'thumbnail', 'text', 'image', 'space')
+    .valid('title', 'project', 'text', 'image', 'space')
     .required()
     .messages({
       'string.base': 'Type must be text',

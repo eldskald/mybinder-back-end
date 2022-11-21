@@ -34,7 +34,7 @@ model Page {
 enum EntryType {
     title
     image
-    thumbnail
+    project
     text
     space
 }
